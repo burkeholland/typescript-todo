@@ -1,0 +1,16 @@
+.todo-list {
+  max-width: 800px;
+  padding: 50px;
+  margin: auto;
+}
+.todo-item:hover .delete {
+  display: inline-block;
+}
+.delete {
+  display: none;
+  margin: auto;
+}
+.no-border {
+  border: none;
+  box-shadow: none;
+}

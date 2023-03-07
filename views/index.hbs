@@ -1,0 +1,60 @@
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8' />
+  <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css' />
+  <link rel='stylesheet' href='site.css' />
+  <title>Todo List</title>
+</head>
+
+<body>
+  <section class="section">
+    <div id='app' class='container'>
+      <div class='todo-list'>
+        <h1 class='is-size-1 mb-2'>Todo List</h1>
+        <div class="box">
+          <form action='/todo/create' method='POST' class="m-0">
+            <div class="columns is-mobile">
+              <div class="column">
+                <input name='newTodo' type='text' class='input is-large' placeholder='Enter new todo' required />
+              </div>
+              <div class="column is-narrow">
+                <input type='submit' class='button is-secondary is-large' value='Add' />
+              </div>
+            </div>
+          </form>
+          {{#each todos}}
+          <div class='todo-item columns is-mobile is-vcentered'>
+            <div class="column">
+              <form class="is-size-5 mb-0" action="todo/update/{{id}}" method="POST">
+                <div class="columns is-vcentered">
+                  <div class="column is-narrow">
+                    <label class="is-sr-only" for="isCompleted">Mark as completed</label>
+                    <input type="checkbox" name="isCompleted" {{#if isCompleted}}checked{{/if}}
+                      onChange="this.form.submit()" class="checkbox is-medium" placeholder="Item completed status">
+                  </div>
+                  <div class="column">
+                    <label class="is-sr-only" for="title"></label>
+                    <input name="title" id="{{id}}" type="text"
+                      class="input is-medium no-border {{#if isCompleted}}has-text-grey-lighter{{/if}}"
+                      value="{{ title }}" placeholder="Item cannot be blank">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="column is-narrow">
+              <form class="delete" action="/todo/delete/{{id}}" method="POST">
+                <button name="deleteButton" type="submit" class="delete">Delete</button>
+              </form>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
